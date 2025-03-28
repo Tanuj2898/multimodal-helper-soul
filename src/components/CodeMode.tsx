@@ -154,7 +154,7 @@ const CodeMode: React.FC = () => {
                           <p>{'}'}</p>
                           <br />
                           <p className="text-green-400">// Replace inefficient loop with optimized version</p>
-                          <p>const results = data.reduce((acc, item) => {'{'}</p>
+                          <p>const results = data.reduce((acc, item) =&gt; {'{'}</p>
                           <p className="pl-4">// optimized calculation</p>
                           <p className="pl-4">return acc;</p>
                           <p>{'}, initialValue);'}</p>
@@ -233,10 +233,10 @@ const CodeMode: React.FC = () => {
                     <p className="text-green-400"> * @returns {'{'} Array {'}'} - The sorted array</p>
                     <p className="text-green-400"> */</p>
                     <p>function multiPropertySort(arr, props) {'{'}</p>
-                    <p className="pl-4">return [...arr].sort((a, b) => {'{'}</p>
+                    <p className="pl-4">return [...arr].sort((a, b) =&gt; {'{'}</p>
                     <p className="pl-8">for (const prop of props) {'{'}</p>
                     <p className="pl-12">if (a[prop] !== b[prop]) {'{'}</p>
-                    <p className="pl-16">return a[prop] > b[prop] ? 1 : -1;</p>
+                    <p className="pl-16">return a[prop] &gt; b[prop] ? 1 : -1;</p>
                     <p className="pl-12">{'}'}</p>
                     <p className="pl-8">{'}'}</p>
                     <p className="pl-8">return 0;</p>
