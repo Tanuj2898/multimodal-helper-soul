@@ -17,9 +17,13 @@ import {
   XCircle,
   HelpCircle
 } from 'lucide-react';
+import GitHubImport from './GitHubImport';
+import { toast } from "@/hooks/use-toast";
 
 const CodeMode: React.FC = () => {
   const [codeInput, setCodeInput] = useState('// Paste your code here for analysis');
+  const [explainInput, setExplainInput] = useState('');
+  const [generateInput, setGenerateInput] = useState('');
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [hasAnalyzed, setHasAnalyzed] = useState(false);
   
@@ -29,6 +33,32 @@ const CodeMode: React.FC = () => {
       setIsAnalyzing(false);
       setHasAnalyzed(true);
     }, 2000);
+  };
+
+  const handleFileLoad = () => {
+    // This would be implemented in a full version to allow loading local files
+    toast({
+      title: "Feature not available in demo",
+      description: "Loading local files would be available in the full version",
+    });
+  };
+
+  const handleGitHubImport = (code: string) => {
+    setCodeInput(code);
+  };
+
+  const handleGenerateCode = () => {
+    toast({
+      title: "Feature not available in demo",
+      description: "Code generation would be available in the full version",
+    });
+  };
+
+  const handleExplainCode = () => {
+    toast({
+      title: "Feature not available in demo", 
+      description: "Code explanation would be available in the full version",
+    });
   };
 
   return (
@@ -74,14 +104,11 @@ const CodeMode: React.FC = () => {
                 
                 <div className="flex justify-between">
                   <div className="space-x-2">
-                    <Button variant="outline" size="sm">
+                    <Button variant="outline" size="sm" onClick={handleFileLoad}>
                       <FileCode size={16} className="mr-2" />
                       Load File
                     </Button>
-                    <Button variant="outline" size="sm">
-                      <Github size={16} className="mr-2" />
-                      Import from GitHub
-                    </Button>
+                    <GitHubImport onImport={handleGitHubImport} />
                   </div>
                   
                   <Button 
@@ -183,6 +210,8 @@ const CodeMode: React.FC = () => {
                   <Textarea 
                     placeholder="Describe the code you need, e.g., 'A function to sort an array of objects by multiple properties'"
                     className="min-h-[100px]"
+                    value={generateInput}
+                    onChange={(e) => setGenerateInput(e.target.value)}
                   />
                 </div>
                 
@@ -213,7 +242,7 @@ const CodeMode: React.FC = () => {
                   </div>
                 </div>
                 
-                <Button className="w-full">
+                <Button className="w-full" onClick={handleGenerateCode}>
                   <Terminal size={16} className="mr-2" />
                   Generate Code
                 </Button>
@@ -262,9 +291,11 @@ const CodeMode: React.FC = () => {
                 <Textarea
                   className="min-h-[200px] font-mono text-sm"
                   placeholder="Paste code you'd like to understand..."
+                  value={explainInput}
+                  onChange={(e) => setExplainInput(e.target.value)}
                 />
                 
-                <Button className="w-full">
+                <Button className="w-full" onClick={handleExplainCode}>
                   <MessagesSquare size={16} className="mr-2" />
                   Explain This Code
                 </Button>
