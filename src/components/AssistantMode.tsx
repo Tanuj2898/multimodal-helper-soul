@@ -1,10 +1,10 @@
-
 import React, { useState, useRef, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Mic, Send, Volume2, ArrowDown } from 'lucide-react';
+import { Mic, Send, Volume2, ArrowRight } from 'lucide-react';
 import VoiceWaveform from './VoiceWaveform';
+import { Link } from 'react-router-dom';
 
 interface Message {
   id: string;
@@ -30,7 +30,6 @@ const AssistantMode: React.FC = () => {
   const handleSendMessage = () => {
     if (input.trim() === '') return;
     
-    // Add user message
     const userMessage: Message = {
       id: Date.now().toString(),
       type: 'user',
@@ -42,11 +41,9 @@ const AssistantMode: React.FC = () => {
     setInput('');
     setIsTyping(true);
     
-    // Simulate assistant response after a delay
     setTimeout(() => {
       let response = '';
       
-      // Generate different responses based on user input
       if (input.toLowerCase().includes('hello') || input.toLowerCase().includes('hi')) {
         response = 'Hello! How can I assist you today?';
       } else if (input.toLowerCase().includes('name')) {
@@ -58,7 +55,7 @@ const AssistantMode: React.FC = () => {
       } else if (input.toLowerCase().includes('reminder') || input.toLowerCase().includes('schedule')) {
         response = 'I can set reminders and manage your schedule. In the full version, I would sync with your calendar.';
       } else {
-        response = 'I understand you want to know about that. In the full version, I would provide detailed information on this topic.';
+        response = 'I understand you want to know about that. In the full version, I would connect to knowledge bases and APIs to provide detailed information on this topic.';
       }
       
       const assistantMessage: Message = {
@@ -83,7 +80,6 @@ const AssistantMode: React.FC = () => {
     setIsRecording(!isRecording);
     
     if (!isRecording) {
-      // Simulate voice recognition after 3 seconds
       setTimeout(() => {
         setIsRecording(false);
         setInput('Can you help me with scheduling a meeting?');
@@ -91,7 +87,6 @@ const AssistantMode: React.FC = () => {
     }
   };
 
-  // Auto scroll to bottom of messages
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
@@ -176,13 +171,13 @@ const AssistantMode: React.FC = () => {
               <VoiceWaveform isActive={isRecording} className="mx-auto" />
               
               <h3 className="text-2xl font-medium">Voice Assistant</h3>
-              <p className="text-muted-foreground">
+              <p className="text-muted-foreground mb-6">
                 In the full version, I can process voice commands in multiple languages 
                 including English, Hindi, Gujarati, Japanese, Russian, Korean, Chinese, 
                 French, and Spanish.
               </p>
               
-              <div className="flex gap-4 justify-center">
+              <div className="flex gap-4 justify-center mb-8">
                 <Button 
                   size="lg" 
                   onClick={toggleRecording}
@@ -196,6 +191,20 @@ const AssistantMode: React.FC = () => {
                   <Volume2 size={18} className="mr-2" />
                   Text to Speech
                 </Button>
+              </div>
+              
+              <div className="bg-secondary/50 p-6 rounded-lg">
+                <h4 className="font-medium mb-2">Try our advanced voice interface</h4>
+                <p className="text-sm text-muted-foreground mb-4">
+                  Experience A.I.S.H.A.'s full voice capabilities with real-time speech recognition 
+                  and natural language processing.
+                </p>
+                <Link to="/voice">
+                  <Button className="w-full">
+                    Advanced Voice Interface
+                    <ArrowRight size={16} className="ml-2" />
+                  </Button>
+                </Link>
               </div>
             </div>
           </TabsContent>
